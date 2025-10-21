@@ -18,8 +18,8 @@ type clientAdapter struct {
 
 // RoundTrip implements fasthttp.RoundTripper by calling the wrapped client's Do method
 func (ca *clientAdapter) RoundTrip(hc *fasthttp.HostClient, req *fasthttp.Request, resp *fasthttp.Response) (retry bool, err error) {
-	err = ca.client.DoTimeout(req, resp, 0)
-	return false, err
+    _, err = ca.client.RoundTrip(hc, req, resp)
+    return false, err
 }
 
 func configureDialer(d *Dialer) {
